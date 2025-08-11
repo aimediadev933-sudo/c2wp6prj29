@@ -1,1 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONNECT - Cable Operators Networks Neutral Exchange for Community Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #EC1550;
+            --secondary: #F69AB0;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #5E0023;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary-dark));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .partner-logos img {
+            height: 50px;
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .partner-logos img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-text .description {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="2"/><circle cx="30" cy="30" r="5" fill="white"/><circle cx="70" cy="30" r="5" fill="white"/><circle cx="30" cy="70" r="5" fill="white"/><circle cx="70" cy="70" r="5" fill="white"/></svg>') repeat;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .nav-container a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-container a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: white;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-left-color: var(--primary);
+        }
+
+        .content-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-card ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .content-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* SDG Section */
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .sdg-card {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .sdg-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Partners Section */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .partner-logos img {
+                height: 40px;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1rem;
+            }
+
+            .partner-logos {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section > * {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="partner-logos">
+                        <img src="images/logos/tein-logo.png" alt="TEIN Cooperation Center" />
+                        <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" />
+                        <img src="images/logos/eu-logo.png" alt="European Union" />
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h1>CONNECT</h1>
+                    <div class="subtitle">Cable Operators Networks Neutral Exchange for Community Transformation</div>
+                    <div class="description">Bridging the digital divide through innovative community-driven broadband networks in the Philippines</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#overview">Overview</a>
+                <a href="#outcomes">Key Outcomes</a>
+                <a href="#activities">Activities</a>
+                <a href="#partners">Partners</a>
+                <a href="#impact">Impact</a>
+                <a href="#future">Future</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+        <div class="container">
+            <h2>Project Overview</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Mission</h3>
+                    <p>Transform small and mid-sized cable TV operators into key players in bridging the digital divide, particularly in underserved and remote communities of the Philippines.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Approach</h3>
+                    <p>Establish open, software-defined Internet Exchange Points (IXPs) and deploy community-based wireless and fiber-optic networks through deep community engagement and civic partnerships.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Target Communities</h3>
+                    <ul>
+                        <li>Binangonan (Rizal Province)</li>
+                        <li>Science City of Muñoz (Nueva Ecija Province)</li>
+                        <li>Surrounding barangays</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Outcomes Section -->
+    <section id="outcomes" class="section">
+        <div class="container">
+            <h2>Key Achievements</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">IXPs Deployed<br>(SCIMIX & CONNECT-IX)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">26km</div>
+                    <div class="stat-label">Fiber Backbone<br>+ 8km Drop Cable</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">35</div>
+                    <div class="stat-label">Public WiFi<br>Access Points</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8,900+</div>
+                    <div class="stat-label">Users Connected<br>to Community WiFi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Barangays<br>Interconnected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">40</div>
+                    <div class="stat-label">Barangays Planned<br>for Expansion</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section">
+        <div class="container">
+            <h2>Project Activities</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Infrastructure Deployment</h3>
+                    <ul>
+                        <li>Software-defined IXPs (SCIMIX and CONNECT-IX)</li>
+                        <li>26 km fiber backbone installation</li>
+                        <li>8 km drop cable deployment</li>
+                        <li>35 public WiFi access points</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Capacity Building</h3>
+                    <ul>
+                        <li>BGP training for cable operators</li>
+                        <li>SDN training programs</li>
+                        <li>Community tech contact training</li>
+                        <li>APNIC membership applications</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Community Engagement</h3>
+                    <ul>
+                        <li>Community-led fiber installation</li>
+                        <li>Partnership with Rotary Club</li>
+                        <li>Local government collaboration</li>
+                        <li>Telehealth and e-learning facilities</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Academic Integration</h3>
+                    <ul>
+                        <li>Eduroam-enabled public nodes</li>
+                        <li>Research connectivity support</li>
+                        <li>University partnerships</li>
+                        <li>Best paper awards and publications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="section">
+        <div class="container">
+            <h2>Partner Organizations</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <h3>University of the Philippines Diliman</h3>
+                    <p>Lead academic institution</p>
+                </div>
+                <div class="partner-card">
+                    <h3>Advanced Science and Technology Institute (ASTI)</h3>
+                    <p>Technical research partner</p>
+                </div>
+                <div class="partner-card">
+                    <h3>Telmarc Cable Corporation</h3>
+                    <p>Cable operator partner</p>
+                </div>
+                <div class="partner-card">
+                    <h3>Central Luzon State University (CLSU)</h3>
+                    <p>Regional academic partner</p>
+                </div>
+                <div class="partner-card">
+                    <h3>PREGINET</h3>
+                    <p>Network infrastructure partner</p>
+                </div>
+                <div class="partner-card">
+                    <h3>Rotary Club of Marikina North</h3>
+                    <p>Community service partner</p>
+                </div>
+                <div class="partner-card">
+                    <h3>Local Government Units</h3>
+                    <p>Binangonan and participating barangays</p>
+                </div>
+                <div class="partner-card">
+                    <h3>SEAFDEC</h3>
+                    <p>Southeast Asian Fisheries Development Center</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="section">
+        <div class="container">
+            <h2>SDG Impact</h2>
+            <div class="sdg-grid">
+                <div class="sdg-card">
+                    <div class="sdg-number">SDG 4</div>
+                    <div>Quality Education through eLearning via public WiFi</div>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">SDG 9</div>
+                    <div>Innovation & Infrastructure with IXP and SDN deployment</div>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">SDG 10</div>
+                    <div>Reduced Inequalities through rural digital access</div>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">SDG 11</div>
+                    <div>Sustainable Cities & Communities via civic-built connectivity</div>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">SDG 17</div>
+                    <div>Partnerships for the Goals with TEIN, Rotary, LGUs, and academia</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Directions Section -->
+    <section id="future" class="section">
+        <div class="container">
+            <h2>Future Directions</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Expansion Plans</h3>
+                    <ul>
+                        <li>Scale to 40 barangays in Binangonan</li>
+                        <li>Replicate model in other developing countries</li>
+                        <li>Extend to remote islands</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Policy Influence</h3>
+                    <ul>
+                        <li>Support open-access infrastructure</li>
+                        <li>Recognize community networks in broadband plans</li>
+                        <li>Advocate for streamlined regulations</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Service Growth</h3>
+                    <ul>
+                        <li>Expand Eduroam coverage</li>
+                        <li>Enhance NREN connectivity</li>
+                        <li>Improve research access</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>Sustainability</h3>
+                    <ul>
+                        <li>Community ownership models</li>
+                        <li>Long-term partnerships</li>
+                        <li>Knowledge transfer programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CONNECT Project</h3>
+                    <p>WP6 - Helping to Bridge the Digital Divide in Developing Countries</p>
+                    <p>2nd Call Award Recipient</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Leading Institution</h3>
+                    <p>University of the Philippines Diliman</p>
+                    <p>Philippines</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Supported By</h3>
+                    <p>TEIN Cooperation Center</p>
+                    <p>Asia Connect</p>
+                    <p>European Union</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CONNECT Project. Bridging communities through technology.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
